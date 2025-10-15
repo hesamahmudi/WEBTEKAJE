@@ -6,11 +6,12 @@
     <title>Anggota X TKJ 1</title>
     <link rel="stylesheet" href="anggota.css">
 </head>
+ 
 <body>
 
     <header class="member-header">
         
-        <a href="WEBKELAS.html" class="back-link">KEMBALI 🔙</a>
+        <a href="index.html" class="back-link">KEMBALI 🔙</a>
         
         <h1>X TKJ 1 MEMBER</h1>
         
@@ -207,7 +208,7 @@
 </div>
 <div class="kartu-siswa">
     <img src="foto/siswa_31.jpg" alt="Foto Siswa 31">
-    <h4>RARA HAMIDAH FAUZIAH</h4>
+    <h4>RARA HAMIDAH</h4>
     <p>Sekretaris</p>
     <span class="absen">Absen: 31</span>
 </div>
@@ -223,12 +224,131 @@
     <p>Anggota</p>
     <span class="absen">Absen: 33</span>
 </div>
-<div class="kartu-siswa">
-    <img src="foto/siswa_34.jpg" alt="Foto Siswa 34">
-    <h4>RARA HAMIDAH</h4>
-    <p>Anggota</p>
-    <span class="absen">Absen: 34</span>
-</div>
+
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body;
+  const header = document.querySelector("header");
+  const menuItems = document.querySelectorAll(".menu-item");
+  const footer = document.querySelector(".bottom-bar");
+  const kartu = document.querySelectorAll(".kartu-siswa");
+
+  /* 🌟 SEMUA ELEMEN AWALNYA DISEMBUNYIKAN */
+  body.style.opacity = 0;
+  if (header) header.style.opacity = 0;
+  if (footer) footer.style.opacity = 0;
+  kartu.forEach(k => {
+    k.style.opacity = 0;
+    k.style.transform = "translateY(30px)";
+  });
+
+  /* ✨ ANIMASI MASUK SAAT HALAMAN DIBUKA */
+  setTimeout(() => {
+    body.style.transition = "opacity 1s ease";
+    body.style.opacity = 1;
+  }, 100);
+
+  if (header) {
+    setTimeout(() => {
+      header.style.transition = "opacity 1s ease, transform 0.8s ease";
+      header.style.opacity = 1;
+      header.style.transform = "translateY(0)";
+    }, 400);
+  }
+
+  /* 🎴 ANIMASI MUNCUL KARTU BERURUT */
+  kartu.forEach((k, i) => {
+    setTimeout(() => {
+      k.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+      k.style.opacity = 1;
+      k.style.transform = "translateY(0)";
+    }, 600 + i * 100);
+  });
+
+  if (footer) {
+    setTimeout(() => {
+      footer.style.transition = "opacity 1s ease, transform 0.8s ease";
+      footer.style.opacity = 1;
+      footer.style.transform = "translateY(0)";
+    }, 1500);
+  }
+
+  /* 🖱️ EFEK KETIKA KLIK MENU */
+  menuItems.forEach(item => {
+    item.addEventListener("click", e => {
+      const link = item.querySelector("a");
+      if (link && link.href) {
+        e.preventDefault();
+
+        // Efek bounce (mantul dikit)
+        item.style.transition = "transform 0.25s ease";
+        item.style.transform = "scale(0.9)";
+        setTimeout(() => (item.style.transform = "scale(1.1)"), 150);
+        setTimeout(() => (item.style.transform = "scale(1)"), 300);
+
+        setTimeout(() => (window.location.href = link.href), 450);
+      }
+    });
+  });
+
+  /* 🔽 ANIMASI SAAT SCROLL (fade + naik dikit) */
+  window.addEventListener("scroll", () => {
+    const elemen = document.querySelectorAll(".kartu-siswa");
+    elemen.forEach(el => {
+      const posisi = el.getBoundingClientRect().top;
+      const tinggiLayar = window.innerHeight;
+
+      if (posisi < tinggiLayar - 100) {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+        el.style.transition = "all 0.6s ease-out";
+      } else {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(40px)";
+      }
+    });
+  });
+});
+</script>
+ <script>
+// Efek klik untuk tombol "KEMBALI 🔙"
+const backLink = document.querySelector('.back-link');
+if (backLink) {
+  backLink.addEventListener('click', () => {
+    backLink.style.animation = 'clickBounce 0.4s ease';
+    setTimeout(() => backLink.style.animation = '', 400);
+  });
+}
+
+// Tambahkan CSS animasi kalau belum ada
+const style = document.createElement('style');
+style.textContent = `
+@keyframes clickBounce {
+  0%   { transform: scale(1); box-shadow: 0 0 0px #00b3ff; }
+  50%  { transform: scale(0.9); box-shadow: 0 0 15px #00b3ff; background-color: #00b3ff; color: white; }
+  100% { transform: scale(1); box-shadow: 0 0 0px #00b3ff; background-color: inherit; color: inherit; }
+}
+
+.back-link {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #1a2b4c;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  background: #00b3ff;
+  box-shadow: 0 0 10px #00b3ff;
+}
+`;
+document.head.appendChild(style);
+</script>
+
 
 
 </body>
